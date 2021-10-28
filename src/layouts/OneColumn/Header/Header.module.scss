@@ -1,0 +1,38 @@
+@use '../variables';
+@use '../shared.module';
+
+.container {
+  padding: (variables.$page-padding * 1.25) variables.$page-padding 0.2in;
+  grid-template-columns: 1fr;
+  grid-gap: 0.1in;
+  display: grid;
+}
+
+.header, .list {
+  margin-bottom: auto;
+  grid-gap: 0.025in;
+  display: grid;
+}
+
+.list {
+  @extend .text__size-xs;
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+}
+
+.item {
+  margin-right: 0.25in;
+}
+
+.list_item {
+  @extend .text__alt;
+  text-decoration: none;
+  align-items: center;
+  display: flex;
+}
+
+.icon {
+  @extend .text__size-md;
+  margin-right: 0.05in;
+}

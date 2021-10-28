@@ -1,0 +1,20 @@
+@use '../shared.module';
+@use '../variables';
+
+.heading {
+  @extend .text__size-md;
+  @extend .text__primary;
+  margin: 0.15in 0 0.025in;
+}
+
+.subheading {
+  @extend .text__size-sm;
+  display: flex;
+}
+
+.content {
+  @extend .text__size-sm;
+  @extend .text__alt;
+  margin-top: 0.1in;
+  line-height: 1.5;
+}

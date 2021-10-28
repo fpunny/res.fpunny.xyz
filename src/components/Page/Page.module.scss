@@ -1,0 +1,14 @@
+@use '../../styles/variables';
+@use '../../styles/colors';
+
+.container {
+  background-color: colors.get-color(page);
+  height: variables.$page-height;
+  width: variables.$page-width;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+
+  @media print {
+    border-radius: 0;
+  }
+}

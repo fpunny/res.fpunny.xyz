@@ -1,0 +1,23 @@
+@use '../shared.module';
+@use '../variables';
+
+.container {
+  grid-template-columns: min-content auto;
+  grid-gap: 0.1in 0.15in;
+  display: grid;
+}
+
+.label {
+  @extend .text__size-md;
+  color: rgb(var(--primary));
+}
+
+.list {
+  @extend .text__size-sm;
+  @extend .text__alt;
+  list-style-type: none;
+  flex-wrap: wrap;
+  display: flex;
+  gap: 0.1in;
+  padding: 0;
+}

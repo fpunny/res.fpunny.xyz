@@ -1,0 +1,9 @@
+@use '../variables';
+
+.container {
+  padding: (variables.$page-padding * 0.75) variables.$page-padding 0;
+}
+
+.heading {
+  margin-bottom: variables.$page-padding * 0.1;
+}

@@ -1,0 +1,77 @@
+$_colors: (
+  default: (
+    background: (
+      color: #dfe1e6,
+      static: true,
+    ),
+    page: (
+      color: white,
+    ),
+    text: (
+      color: black,
+      static: true,
+    ),
+    alt-text: (
+      color: #737373,
+      static: true,
+    ),
+  ),
+  dark: (
+    background: (
+      color: #393939,
+      static: true,
+    ),
+    page: (
+      color: #252525,
+    ),
+    text: (
+      color: #ccc,
+      static: true,
+    ),
+    alt-text: (
+      color: #8c8c8c,
+      static: true,
+    ),
+  ),
+);
+
+@mixin init($local-colors: null, $theme: default) {
+  $colors: map-get($_colors, $theme);
+  @if $theme == default {
+    :root {
+      @each $color, $config in $colors {
+        $hex: map-get($config, color);
+        --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
+      }
+    
+      @if $local-colors {
+        @each $color, $config in $local-colors {
+          $hex: map-get($config, color);
+          --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
+        }
+      }
+    }
+  } @else {
+    .#{$theme} {
+      @each $color, $config in $colors {
+        $hex: map-get($config, color);
+        --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
+      }
+    
+      @if $local-colors {
+        @each $color, $config in $local-colors {
+          $hex: map-get($config, color);
+          --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
+        }
+      }
+    }
+  }
+}
+
+@function get-color($color, $modifier: null, $alpha: 1) {
+  $var: --#{$color};
+  @if ($modifier) {
+    $var: #{$var}--#{$modifier};
+  }
+  @return rgba(var(#{$var}), #{$alpha});
+}

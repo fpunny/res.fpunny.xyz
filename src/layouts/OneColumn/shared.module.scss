@@ -1,0 +1,27 @@
+.text {
+  &__primary {
+    color: rgb(var(--primary));
+  }
+
+  &__alt {
+    color: rgb(var(--alt-text));
+  }
+
+  &__size {
+    &-lg {
+      font-size: 17px;
+    }
+
+    &-md {
+      font-size: 14.5px;
+    }
+
+    &-sm {
+      font-size: 13px;
+    }
+
+    &-xs {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@use '../../styles/colors';
+
+@page {
+  size: letter portrait;
+  margin: 0;
+}
+
+:global {
+  @include colors.init();
+  @include colors.init($theme: dark);
+
+  * {
+    margin: 0;
+  }
+
+  html {
+    background-color: colors.get-color(background);
+    font-family: 'Inter', sans-serif;
+    color: colors.get-color(text);
+    min-height: 100%;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+
+  #gatsby-focus-wrapper {
+    justify-items: center;
+    grid-gap: 2rem;
+    display: grid;
+    padding: 4rem;
+
+    @media print {
+      grid-gap: 0;
+      padding: 0;
+    }
+  }
+}
+
+.controls {
+  inset: auto 1rem 1rem auto;
+  position: fixed;
+
+  @media print {
+    display: none;
+  }
+}
+
+.control {
+  background-color: colors.get-color(page);
+  border: none;
+}
