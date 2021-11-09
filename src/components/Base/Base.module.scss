@@ -1,3 +1,4 @@
+@use '../../styles/mixins';
 @use '../../styles/colors';
 
 @page {
@@ -38,15 +39,45 @@
 }
 
 .controls {
-  inset: auto 1rem 1rem auto;
+  @include mixins.transition(transform, $speed: slow);
+  transform: translateY(-1rem);
+  inset: auto 1rem 0 auto;
   position: fixed;
 
   @media print {
     display: none;
   }
+
+  &__hidden {
+    transform: translateY(100%);
+  }
 }
 
 .control {
+  @include mixins.transition(background-color color);
   background-color: colors.get-color(page);
+  color: colors.get-color(text);
+  box-sizing: border-box;
+  border-radius: 999px;
+  margin-top: 0.5rem;
+  aspect-ratio: 1;
+  cursor: pointer;
+  display: block;
+  padding: 1rem;
   border: none;
+
+  &:hover, &:focus {
+    background-color: colors.get-color(page, hover);
+    color: colors.get-color(primary);
+  }
+
+  &:active {
+    background-color: colors.get-color(page, active);
+  }
+}
+
+.icon {
+  display: flex;
+  width: 1.2rem;
+  height: auto;
 }

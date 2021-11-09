@@ -1,10 +1,12 @@
+@use '../../styles/colors';
+
 .text {
   &__primary {
-    color: rgb(var(--primary));
+    color: colors.get-color(primary);
   }
 
   &__alt {
-    color: rgb(var(--alt-text));
+    color: colors.get-color(alt-text);
   }
 
   &__size {

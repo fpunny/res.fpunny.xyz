@@ -9,7 +9,12 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-remark',
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-netlify`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
     'gatsby-plugin-sass',
+    'gatsby-plugin-svgr',
     {
       resolve: 'gatsby-source-graphcms',
       options: {

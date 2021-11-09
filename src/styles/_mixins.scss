@@ -1,0 +1,34 @@
+$speeds: (
+  fast: 150ms,
+  normal: 200ms,
+  slow: 250ms,
+);
+
+@mixin transition($properties: (), $speed: normal, $delay: 0ms) {
+  $res: ();
+
+  // Build transition of specified property
+  @each $property in $properties {
+    // Use "global" settings
+    $s: map-get($speeds, $speed) or $speed;
+    $p: $property;
+    $d: $delay;
+
+    // For properties with config, merge that
+    @if type-of($property) == 'map' {
+      $_s: map-get($speeds, map-get($property, speed));
+      $s: map-get($speeds, $_s) or $_s or $s;
+      $d: map-get($property, delay) or $d;
+      $p: map-get($property, property);
+    }
+
+    // Generate actual css of property transition
+    @if $p == null {
+      @warn "Missing property for one of the transition map provided";
+    } @else {
+      $res: append($res, $p $s ease-in-out $d, $separator: comma);
+    }
+  }
+
+  transition: $res;
+}

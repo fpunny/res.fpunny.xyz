@@ -35,43 +35,47 @@ $_colors: (
   ),
 );
 
-@mixin init($local-colors: null, $theme: default) {
+@function _hexToRgb($hex) {
+  @return #{red($hex)}, #{green($hex)}, #{blue($hex)};
+}
+
+@mixin _create-color($color, $config) {
+  $hex: map-get($config, color);
+  --#{$color}: #{_hexToRgb($hex)};
+
+  @if not map-get($config, static) {
+    --#{$color}--h: #{_hexToRgb(darken($hex, 5%))};
+    --#{$color}--a: #{_hexToRgb(darken($hex, 10%))};
+  }
+}
+
+@mixin init($local-colors: (), $theme: default) {
   $colors: map-get($_colors, $theme);
   @if $theme == default {
     :root {
-      @each $color, $config in $colors {
-        $hex: map-get($config, color);
-        --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
-      }
-    
-      @if $local-colors {
-        @each $color, $config in $local-colors {
-          $hex: map-get($config, color);
-          --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
-        }
+      @each $color, $config in map-merge($colors, $local-colors) {
+        @include _create-color($color, $config);
       }
     }
   } @else {
     .#{$theme} {
-      @each $color, $config in $colors {
-        $hex: map-get($config, color);
-        --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
-      }
-    
-      @if $local-colors {
-        @each $color, $config in $local-colors {
-          $hex: map-get($config, color);
-          --#{$color}: #{red($hex)}, #{green($hex)}, #{blue($hex)};
-        }
+      @each $color, $config in map-merge($colors, $local-colors) {
+        @include _create-color($color, $config);
       }
     }
   }
 }
 
+$_modifier-map: (
+  hover: h,
+  active: a,
+);
+
 @function get-color($color, $modifier: null, $alpha: 1) {
+  $m: map-get($_modifier-map, $modifier);
   $var: --#{$color};
-  @if ($modifier) {
-    $var: #{$var}--#{$modifier};
+  @if ($m) {
+    $var: #{$var}--#{$m};
   }
   @return rgba(var(#{$var}), #{$alpha});
 }

@@ -9,7 +9,7 @@
 
 .label {
   @extend .text__size-md;
-  color: rgb(var(--primary));
+  @extend .text__primary;
 }
 
 .list {
