@@ -23,7 +23,7 @@
     "gatsby-plugin-sass": "^5.1.1",
     "gatsby-plugin-sharp": "^4.1.1",
     "gatsby-source-filesystem": "^4.1.0",
-    "gatsby-source-graphcms": "^2.6.0",
+    "gatsby-source-graphcms": "^2.7.0-next.1",
     "gatsby-transformer-remark": "^5.1.1",
     "gatsby-transformer-sharp": "^4.1.0",
     "react": "^17.0.1",
