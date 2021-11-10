@@ -10,16 +10,6 @@ exports.onCreateBabelConfig = ({ actions }) => {
   });
 };
 
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      fallback: {
-        assert: require.resolve('assert/'),
-      },
-    },
-  });
-}
-
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const res = await graphql(
     `

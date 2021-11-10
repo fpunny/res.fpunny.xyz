@@ -14,7 +14,6 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
     'gatsby-plugin-sass',
-    'gatsby-plugin-svgr',
     {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
