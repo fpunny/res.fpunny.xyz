@@ -5,7 +5,7 @@ import gtag from '../../../utils/gtag';
 import Control from '../../Control';
 
 export default function ChangeTheme() {
-  const [isDark, setIsDark] = useState(window?.__isDark ?? false);
+  const [isDark, setIsDark] = useState(false);
   const isDirty = useRef(false);
 
   // Handle theming

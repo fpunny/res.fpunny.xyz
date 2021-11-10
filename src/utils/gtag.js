@@ -1,1 +1,1 @@
-export default window?.gtag ?? (() => {});
+export default typeof window !== 'undefined' ? window.gtag : () => {};
