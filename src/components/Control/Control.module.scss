@@ -14,7 +14,8 @@
   padding: 1rem;
   border: none;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: colors.get-color(page, hover);
     color: colors.get-color(primary);
   }

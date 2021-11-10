@@ -10,7 +10,8 @@
   display: grid;
 }
 
-.header, .list {
+.header,
+.list {
   margin-bottom: auto;
   grid-gap: 0.025in;
   display: grid;
@@ -34,7 +35,8 @@
   align-items: center;
   display: flex;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     color: colors.get-color(text);
   }
 

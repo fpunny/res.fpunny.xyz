@@ -20,17 +20,18 @@ const query = graphql`
 
 export default function useMetadata(metadatas = useResume().metadatas) {
   const { data } = useStaticQuery(query);
-  return useMemo(() => data.nodes.concat(metadatas).reduce(
-    (acc, curr) => {
-      acc[curr.field] =
-        curr.stringValue ??
-        curr.numberValue ??
-        curr.booleanValue ??
-        curr.datetimeValue ??
-        curr.jsonValue ??
-        curr.listValue;
-      return acc;
-    },
-    {},
-  ), [ data ]);
+  return useMemo(
+    () =>
+      data.nodes.concat(metadatas).reduce((acc, curr) => {
+        acc[curr.field] =
+          curr.stringValue ??
+          curr.numberValue ??
+          curr.booleanValue ??
+          curr.datetimeValue ??
+          curr.jsonValue ??
+          curr.listValue;
+        return acc;
+      }, {}),
+    [data],
+  );
 }

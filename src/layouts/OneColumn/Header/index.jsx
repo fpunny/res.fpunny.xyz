@@ -1,18 +1,25 @@
-import { OutboundLink } from "gatsby-plugin-google-gtag";
-import { graphql, useStaticQuery } from "gatsby";
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
+import { graphql, useStaticQuery } from 'gatsby';
 import { getMediaIcon, strip } from '../../../utils/media';
-import { useResume } from "../../../components/Base";
-import { container, header, list, item, list_item, icon } from './Header.module.scss';
+import { useResume } from '../../../components/Base';
+import {
+  container,
+  header,
+  list,
+  item,
+  list_item,
+  icon,
+} from './Header.module.scss';
 import { text__primary, text__alt } from '../shared.module.scss';
 
 const query = graphql`
-{
-  site {
-    siteMetadata {
-      author
+  {
+    site {
+      siteMetadata {
+        author
+      }
     }
   }
-}
 `;
 
 export default function Header() {
@@ -22,15 +29,11 @@ export default function Header() {
   return (
     <header className={container}>
       <div className={header}>
-        <h1 className={text__primary}>
-          { site.siteMetadata.author }
-        </h1>
-        <strong>
-          { title }
-        </strong>
+        <h1 className={text__primary}>{site.siteMetadata.author}</h1>
+        <strong>{title}</strong>
       </div>
       <ul className={list}>
-        {socials.map(social => {
+        {socials.map((social) => {
           const Icon = getMediaIcon(social.type);
           return (
             <li className={item} key={social.id}>
@@ -40,10 +43,8 @@ export default function Header() {
                 href={social.url}
                 target='_blank'
               >
-                <Icon className={icon}/>
-                <span>
-                  { strip(social.url, social.type) }
-                </span>
+                <Icon className={icon} />
+                <span>{strip(social.url, social.type)}</span>
               </OutboundLink>
             </li>
           );

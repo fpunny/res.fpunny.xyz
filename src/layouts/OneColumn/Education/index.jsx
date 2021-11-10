@@ -1,14 +1,14 @@
-import BaseSection from "../BaseSection";
+import BaseSection from '../BaseSection';
 import BaseContent from '../BaseContent';
 import { useResume } from '../../../components/Base';
 import Marked from '../../../components/Marked';
-import useDateFormat from "../../../utils/useDateFormat";
+import useDateFormat from '../../../utils/useDateFormat';
 
 // ! Chnage this implementation if you have more than one degree
 // ! I'm too little brain for that I guess :c
 export default function Education() {
   const { educations } = useResume();
-  const [ uni ] = educations;
+  const [uni] = educations;
 
   const format = useDateFormat({
     month: 'short',

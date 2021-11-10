@@ -12,13 +12,15 @@ import Work from './Work';
 import './OneColumn.module.scss';
 
 export default function OneColumn(props) {
-  return <Base {...props}>
-    <Page>
-      <Header/>
-      <Skill/>
-      <Education/>
-      <Work/>
-      <Project/>
-    </Page>
-  </Base>;
+  return (
+    <Base {...props}>
+      <Page>
+        <Header />
+        <Skill />
+        <Education />
+        <Work />
+        <Project />
+      </Page>
+    </Base>
+  );
 }

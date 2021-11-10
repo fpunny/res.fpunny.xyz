@@ -2,10 +2,10 @@ import { RiMoonLine } from '@react-icons/all-files/ri/RiMoonLine';
 import { RiSunLine } from '@react-icons/all-files/ri/RiSunLine';
 import { useEffect, useState, useRef } from 'react';
 import gtag from '../../../utils/gtag';
-import Control from "../../Control";
+import Control from '../../Control';
 
 export default function ChangeTheme() {
-  const [ isDark, setIsDark ] = useState(window?.__isDark ?? false);
+  const [isDark, setIsDark] = useState(window?.__isDark ?? false);
   const isDirty = useRef(false);
 
   // Handle theming
@@ -21,10 +21,12 @@ export default function ChangeTheme() {
     });
     media.addEventListener('change', mediaHandler);
 
-    const beforePrintHandler = () => media.removeEventListener('change', mediaHandler);
+    const beforePrintHandler = () =>
+      media.removeEventListener('change', mediaHandler);
     window.addEventListener('beforeprint', beforePrintHandler);
 
-    const afterPrintHandler = () => media.addEventListener('change', mediaHandler);
+    const afterPrintHandler = () =>
+      media.addEventListener('change', mediaHandler);
     window.addEventListener('afterprint', afterPrintHandler);
 
     window.setTimeout(() => {
@@ -43,17 +45,17 @@ export default function ChangeTheme() {
   // Google analytics tracking
   const printCount = useRef(0);
   useEffect(() => {
-    const handler = () => gtag('event', 'print', {
-      theme: isDark ? 'dark' : 'light',
-      count: ++printCount.current,
-    });
+    const handler = () =>
+      gtag('event', 'print', {
+        theme: isDark ? 'dark' : 'light',
+        count: ++printCount.current,
+      });
 
     window.addEventListener('beforeprint', handler);
     return () => {
       window.removeEventListener('beforeprint', handler);
     };
-
-  }, [ isDark ]);
+  }, [isDark]);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
@@ -63,7 +65,7 @@ export default function ChangeTheme() {
         type: 'theme',
       });
     }
-  }, [ isDark ]);
+  }, [isDark]);
 
   return (
     <Control

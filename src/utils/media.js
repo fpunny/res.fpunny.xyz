@@ -5,7 +5,7 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
 import { FiHome } from '@react-icons/all-files/fi/FiHome';
 
 export function strip(link, type) {
-  switch(type) {
+  switch (type) {
     case 'github':
       return link.replace('https://github.com/', '');
     case 'linkedin':
@@ -16,7 +16,7 @@ export function strip(link, type) {
 }
 
 export function getMediaIcon(type) {
-  switch(type) {
+  switch (type) {
     case 'phone':
       return FiPhone;
     case 'email':

@@ -16,12 +16,8 @@ export default function Control({ icon: Icon, link, action, ...props }) {
     );
   }
 
-
   return (
-    <button
-      {...props}
-      className={control}
-    >
+    <button {...props} className={control}>
       <Icon className={icon} />
     </button>
   );

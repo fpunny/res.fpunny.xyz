@@ -15,13 +15,16 @@ export default function Base({ pageContext, children }) {
   const metadata = useMetadata(metadatas);
 
   // Handle button stuff
-  const [ hideButtons, setHideButtons ] = useState(false);
+  const [hideButtons, setHideButtons] = useState(false);
   useEffect(() => {
     let lastCheckpoint = window.pageYOffset;
     let lastPos = window.pageYOffset;
     const handler = () => {
       const currPos = window.pageYOffset;
-      if ((hideButtons && currPos <= lastPos) || (!hideButtons && currPos >= lastPos)) {
+      if (
+        (hideButtons && currPos <= lastPos) ||
+        (!hideButtons && currPos >= lastPos)
+      ) {
         if (Math.abs(lastCheckpoint - lastPos) >= 10) {
           setHideButtons(!hideButtons);
           lastCheckpoint = currPos;
@@ -36,7 +39,7 @@ export default function Base({ pageContext, children }) {
     return () => {
       window.removeEventListener('scroll', handler, { passive: true });
     };
-  }, [ hideButtons ]);
+  }, [hideButtons]);
 
   return (
     <ResumeContext.Provider value={pageContext.resumeInfo}>
@@ -51,9 +54,9 @@ export default function Base({ pageContext, children }) {
       </Helmet>
       {children}
       <nav className={classNames(controls, hideButtons && controls__hidden)}>
-        <Control icon={RiGithubLine} link='https://github.com/fpunny'/>
-        <ChangePrimary initColor={theme.rgba}/>
-        <ChangeTheme/>
+        <Control icon={RiGithubLine} link='https://github.com/fpunny' />
+        <ChangePrimary initColor={theme.rgba} />
+        <ChangeTheme />
         <Control action='print' icon={RiPrinterLine} onClick={window.print} />
       </nav>
       <Toaster

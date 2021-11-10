@@ -1,5 +1,3 @@
 exports.onRenderBody = ({ setPostBodyComponents }) => {
-  setPostBodyComponents([
-    <div id='modal' key='modal'/>
-  ]);
+  setPostBodyComponents([<div id='modal' key='modal' />]);
 };

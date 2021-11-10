@@ -9,14 +9,14 @@ export default function BaseContent({
 }) {
   return (
     <div>
-      <Heading className={heading}>{ title }</Heading>
-      {subtitle && <div className={subheading}>
-        <p>{ subtitle }</p>
-        { aside && <p>&nbsp;| { aside }</p>}
-      </div>}
-      <div className={content}>
-        { body }
-      </div>
+      <Heading className={heading}>{title}</Heading>
+      {subtitle && (
+        <div className={subheading}>
+          <p>{subtitle}</p>
+          {aside && <p>&nbsp;| {aside}</p>}
+        </div>
+      )}
+      <div className={content}>{body}</div>
     </div>
-  )
+  );
 }
