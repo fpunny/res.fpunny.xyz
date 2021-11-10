@@ -46,6 +46,7 @@
 }
 
 .icon {
+  @include mixins.transition(color);
   @extend .text__size-md;
   margin-right: 0.05in;
 }
