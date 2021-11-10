@@ -17,8 +17,9 @@ export default function ChangeTheme() {
     };
 
     mediaHandler(media);
-    gtag('event', 'theme', {
-      type: media.matches ? 'dark' : 'light',
+    gtag('event', 'set-theme', {
+      event_category: 'init',
+      event_label: media.matches ? 'dark' : 'light',
     });
     media.addEventListener('change', mediaHandler);
 
@@ -48,8 +49,9 @@ export default function ChangeTheme() {
   useEffect(() => {
     const handler = () =>
       gtag('event', 'print', {
-        theme: isDark ? 'dark' : 'light',
-        count: ++printCount.current,
+        event_category: 'actions',
+        event_label: isDark ? 'dark' : 'light',
+        value: ++printCount.current,
       });
 
     window.addEventListener('beforeprint', handler);
@@ -58,12 +60,14 @@ export default function ChangeTheme() {
     };
   }, [isDark]);
 
+  const themeCount = useRef(0);
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
     if (isDirty.current) {
-      gtag('event', 'action', {
-        theme: isDark ? 'dark' : 'light',
-        type: 'theme',
+      gtag('event', 'change-theme', {
+        event_category: 'actions',
+        event_label: isDark ? 'dark' : 'light',
+        value: ++themeCount.current,
       });
     }
   }, [isDark]);

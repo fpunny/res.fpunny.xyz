@@ -45,10 +45,10 @@ export default function ChangePrimary({ initColor }) {
       return acc;
     }, {});
 
-    gtag('event', 'action', {
-      count: ++count.current,
-      color: newTheme,
-      type: 'theme',
+    gtag('event', 'change-color', {
+      value: ++count.current,
+      category: 'actions',
+      label: newTheme,
     });
 
     setTheme(newTheme);
