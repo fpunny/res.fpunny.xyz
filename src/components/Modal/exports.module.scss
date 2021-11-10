@@ -1,0 +1,8 @@
+@use '../../styles/mixins';
+@use "sass:math";
+
+:export {
+  @each $tag, $speed in mixins.$speeds {
+    #{$tag}: math.div($speed, $speed * 0 + 1);
+  }
+}

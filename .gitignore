@@ -1,4 +1,4 @@
-node_modules/
-.cache/
-.env
+node_modules
 public
+.cache
+.env

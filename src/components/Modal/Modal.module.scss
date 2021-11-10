@@ -1,0 +1,46 @@
+@use '../../styles/variables';
+@use '../../styles/mixins';
+@use '../../styles/colors';
+
+.modal {
+  @include mixins.transition(opacity, $speed: var(--speed));
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  cursor: pointer;
+  display: flex;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+
+  &:first-child {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &__speed {
+    @each $tag, $speed in mixins.$speeds {
+      &__#{$tag} {
+        --speed: #{$speed};
+      }
+    }
+  }
+
+  &__hidden {
+    opacity: 0;
+  }
+}
+
+.box {
+  @include mixins.transition(transform);
+  background-color: colors.get-color(page);
+  border-radius: variables.$page-radius;
+  transform: translateY(0);
+  box-sizing: border-box;
+  padding: 1.5rem;
+  cursor: initial;
+
+  .modal__hidden & {
+    transform: translateY(-3rem);
+  }
+}

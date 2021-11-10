@@ -1,5 +1,7 @@
-@use '../variables';
+@use '../../../styles/mixins';
+@use '../../../styles/colors';
 @use '../shared.module';
+@use '../variables';
 
 .container {
   padding: (variables.$page-padding * 1.25) variables.$page-padding 0.2in;
@@ -26,10 +28,19 @@
 }
 
 .list_item {
+  @include mixins.transition(color);
   @extend .text__alt;
   text-decoration: none;
   align-items: center;
   display: flex;
+
+  &:hover, &:focus {
+    color: colors.get-color(text);
+  }
+
+  &:active {
+    color: colors.get-color(primary);
+  }
 }
 
 .icon {

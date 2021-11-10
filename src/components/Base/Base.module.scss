@@ -11,23 +11,32 @@
   @include colors.init($theme: dark);
 
   * {
+    font-family: 'Inter', sans-serif;
     margin: 0;
   }
 
+  h1, h2, h3, h4, h5, h6, p, span, strong {
+    @include mixins.transition(color);
+  }
+
   html {
-    background-color: colors.get-color(background);
-    font-family: 'Inter', sans-serif;
     color: colors.get-color(text);
     min-height: 100%;
+    font-size: 16px;
   }
 
   body {
+    @include mixins.transition(background-color);
+    background-color: colors.get-color(background);
     -webkit-print-color-adjust: exact;
   }
 
   #gatsby-focus-wrapper {
+    box-sizing: border-box;
     justify-items: center;
+    width: fit-content;
     grid-gap: 2rem;
+    margin: 0 auto;
     display: grid;
     padding: 4rem;
 
@@ -53,31 +62,8 @@
   }
 }
 
-.control {
-  @include mixins.transition(background-color color);
+div.toast {
   background-color: colors.get-color(page);
   color: colors.get-color(text);
-  box-sizing: border-box;
-  border-radius: 999px;
-  margin-top: 0.5rem;
-  aspect-ratio: 1;
-  cursor: pointer;
-  display: block;
-  padding: 1rem;
-  border: none;
-
-  &:hover, &:focus {
-    background-color: colors.get-color(page, hover);
-    color: colors.get-color(primary);
-  }
-
-  &:active {
-    background-color: colors.get-color(page, active);
-  }
-}
-
-.icon {
-  display: flex;
-  width: 1.2rem;
-  height: auto;
+  font-weight: bold;
 }

@@ -1,0 +1,31 @@
+@use '../../styles/mixins';
+@use '../../styles/colors';
+
+.control {
+  @include mixins.transition(background-color color);
+  background-color: colors.get-color(page);
+  color: colors.get-color(text);
+  box-sizing: border-box;
+  border-radius: 999px;
+  margin-top: 0.5rem;
+  aspect-ratio: 1;
+  cursor: pointer;
+  display: block;
+  padding: 1rem;
+  border: none;
+
+  &:hover, &:focus {
+    background-color: colors.get-color(page, hover);
+    color: colors.get-color(primary);
+  }
+
+  &:active {
+    background-color: colors.get-color(page, active);
+  }
+}
+
+.icon {
+  display: flex;
+  width: 1.2rem;
+  height: auto;
+}

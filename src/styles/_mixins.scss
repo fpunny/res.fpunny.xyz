@@ -30,5 +30,7 @@ $speeds: (
     }
   }
 
-  transition: $res;
+  :global(.animate) & {
+    transition: $res;
+  }
 }

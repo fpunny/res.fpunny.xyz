@@ -1,12 +1,14 @@
 @use '../../styles/variables';
+@use '../../styles/mixins';
 @use '../../styles/colors';
 
 .container {
+  @include mixins.transition(background-color);
   background-color: colors.get-color(page);
+  border-radius: variables.$page-radius;
   height: variables.$page-height;
   width: variables.$page-width;
   box-sizing: border-box;
-  border-radius: 0.5rem;
 
   @media print {
     border-radius: 0;
