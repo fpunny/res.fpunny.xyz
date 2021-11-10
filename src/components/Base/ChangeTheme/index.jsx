@@ -1,12 +1,13 @@
 import { RiMoonLine } from '@react-icons/all-files/ri/RiMoonLine';
 import { RiSunLine } from '@react-icons/all-files/ri/RiSunLine';
 import { useEffect, useState, useRef } from 'react';
-import gtag from '../../../utils/gtag';
+import useAnalytics from '../../../utils/useAnalytics';
 import Control from '../../Control';
 
 export default function ChangeTheme() {
   const [isDark, setIsDark] = useState(false);
   const isDirty = useRef(false);
+  const gtag = useAnalytics();
 
   // Handle theming
   useEffect(() => {

@@ -2,7 +2,7 @@ import { RiPaintBrushLine } from '@react-icons/all-files/ri/RiPaintBrushLine';
 import { Helmet } from 'react-helmet';
 import { useEffect, useRef, useState } from 'react';
 import useCheatcode from '../../../utils/useCheatcode';
-import gtag from '../../../utils/gtag';
+import useAnalytics from '../../../utils/useAnalytics';
 import Control from '../../Control';
 import Modal from '../../Modal';
 import {
@@ -31,6 +31,7 @@ export default function ChangePrimary({ initColor }) {
   const enabled = useCheatcode('owowatsdis?', 'Color mode');
   const [theme, setTheme] = useState(initColor);
   const [tempTheme, setTempTheme] = useState();
+  const gtag = useAnalytics();
   const count = useRef(0);
 
   useEffect(() => {
