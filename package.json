@@ -34,7 +34,7 @@
     "sass": "^1.43.4"
   },
   "devDependencies": {
-    "@netlify/plugin-gatsby": "^2.0.0-beta",
+    "@netlify/plugin-gatsby": "^1.0.3",
     "eslint-config-react-app": "^6.0.0",
     "prettier": "^2.4.1"
   }
