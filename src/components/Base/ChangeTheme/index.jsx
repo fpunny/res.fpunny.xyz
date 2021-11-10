@@ -1,6 +1,7 @@
 import { RiMoonLine } from '@react-icons/all-files/ri/RiMoonLine';
 import { RiSunLine } from '@react-icons/all-files/ri/RiSunLine';
 import { useEffect, useState, useRef } from 'react';
+import gtag from '../../../utils/gtag';
 import Control from "../../Control";
 
 export default function ChangeTheme() {
@@ -15,6 +16,9 @@ export default function ChangeTheme() {
     };
 
     mediaHandler(media);
+    gtag('event', 'theme', {
+      type: media.matches ? 'dark' : 'light',
+    });
     media.addEventListener('change', mediaHandler);
 
     const beforePrintHandler = () => media.removeEventListener('change', mediaHandler);
@@ -36,8 +40,29 @@ export default function ChangeTheme() {
     };
   }, []);
 
+  // Google analytics tracking
+  const printCount = useRef(0);
+  useEffect(() => {
+    const handler = () => gtag('event', 'print', {
+      theme: isDark ? 'dark' : 'light',
+      count: ++printCount.current,
+    });
+
+    window.addEventListener('beforeprint', handler);
+    return () => {
+      window.removeEventListener('beforeprint', handler);
+    };
+
+  }, [ isDark ]);
+
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
+    if (isDirty.current) {
+      gtag('event', 'action', {
+        theme: isDark ? 'dark' : 'light',
+        type: 'theme',
+      });
+    }
   }, [ isDark ]);
 
   return (

@@ -1,9 +1,10 @@
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import { control, icon } from './Control.module.scss';
 
-export default function Control({ icon: Icon, link, ...props }) {
+export default function Control({ icon: Icon, link, action, ...props }) {
   if (link) {
     return (
-      <a
+      <OutboundLink
         {...props}
         rel='noopener noreferrer'
         className={control}
@@ -11,7 +12,7 @@ export default function Control({ icon: Icon, link, ...props }) {
         href={link}
       >
         <Icon className={icon} />
-      </a>
+      </OutboundLink>
     );
   }
 

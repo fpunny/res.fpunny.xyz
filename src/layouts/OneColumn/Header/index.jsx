@@ -1,6 +1,7 @@
+import { OutboundLink } from "gatsby-plugin-google-gtag";
 import { graphql, useStaticQuery } from "gatsby";
-import { useResume } from "../../../components/Base";
 import { getMediaIcon, strip } from '../../../utils/media';
+import { useResume } from "../../../components/Base";
 import { container, header, list, item, list_item, icon } from './Header.module.scss';
 import { text__primary, text__alt } from '../shared.module.scss';
 
@@ -33,7 +34,7 @@ export default function Header() {
           const Icon = getMediaIcon(social.type);
           return (
             <li className={item} key={social.id}>
-              <a
+              <OutboundLink
                 rel='noopener noreferrer'
                 className={list_item}
                 href={social.url}
@@ -43,7 +44,7 @@ export default function Header() {
                 <span>
                   { strip(social.url, social.type) }
                 </span>
-              </a>
+              </OutboundLink>
             </li>
           );
         })}

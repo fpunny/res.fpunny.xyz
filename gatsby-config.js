@@ -16,6 +16,14 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-svgr',
     {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: [
+          process.env.GOOGLE_ANALYTICS,
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-source-graphcms',
       options: {
         endpoint: process.env.GRAPHCMS_ENDPOINT,

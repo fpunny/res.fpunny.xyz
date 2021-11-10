@@ -54,7 +54,7 @@ export default function Base({ pageContext, children }) {
         <Control icon={RiGithubLine} link='https://github.com/fpunny'/>
         <ChangePrimary initColor={theme.rgba}/>
         <ChangeTheme/>
-        <Control icon={RiPrinterLine} onClick={window.print} />
+        <Control action='print' icon={RiPrinterLine} onClick={window.print} />
       </nav>
       <Toaster
         position='bottom-center'

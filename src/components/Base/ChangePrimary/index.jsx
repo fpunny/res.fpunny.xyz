@@ -2,6 +2,7 @@ import { RiPaintBrushLine } from '@react-icons/all-files/ri/RiPaintBrushLine';
 import { Helmet } from 'react-helmet';
 import { useEffect, useRef, useState } from 'react';
 import useCheatcode from '../../../utils/useCheatcode';
+import gtag from '../../../utils/gtag';
 import Control from '../../Control';
 import Modal from '../../Modal';
 import {colorPreview, inputGroup, colorInput, colorControls, colorInputs, save} from './ChangePrimary.module.scss';
@@ -25,6 +26,7 @@ export default function ChangePrimary({ initColor }) {
   const enabled = useCheatcode('owowatsdis?', 'Color mode');
   const [ theme, setTheme ] = useState(initColor);
   const [ tempTheme, setTempTheme ] = useState();
+  const count = useRef(0);
 
   useEffect(() => {
     if (!enabled) setTempTheme();
@@ -32,13 +34,19 @@ export default function ChangePrimary({ initColor }) {
 
   const submit = (e) => {
     e.preventDefault();
-    setTheme(
-      Object.entries(tempTheme)
-      .reduce((acc, [ key, value ]) => {
-        acc[key] = sanitizeColor(value);
-        return acc;
-      }, {})
-    );
+    const newTheme = Object.entries(tempTheme)
+    .reduce((acc, [ key, value ]) => {
+      acc[key] = sanitizeColor(value);
+      return acc;
+    }, {});
+
+    gtag('event', 'action', {
+      count: ++count.current,
+      color: newTheme,
+      type: 'theme',
+    });
+
+    setTheme(newTheme);
     setTempTheme();
     return false;
   }
