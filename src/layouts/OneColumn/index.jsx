@@ -13,7 +13,7 @@ import './OneColumn.module.scss';
 
 export default function OneColumn(props) {
   return (
-    <Base {...props}>
+    <Base {...props} withButtons>
       <Page>
         <Header />
         <Skill />

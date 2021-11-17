@@ -4,19 +4,21 @@ import { RiGithubLine } from '@react-icons/all-files/ri/RiGithubLine';
 import { Toaster } from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
 import classNames from 'classnames';
+import { ThemeProvider } from '../../utils/useTheme';
 import useMetadata from '../../utils/useMetadata';
 import ChangePrimary from './ChangePrimary';
 import ChangeTheme from './ChangeTheme';
 import Control from '../Control';
 import { controls, controls__hidden, toast } from './Base.module.scss';
 
-export default function Base({ pageContext, children }) {
-  const { theme, metadatas } = pageContext.resumeInfo;
+export default function Base({ pageContext, withButtons, children }) {
+  const { theme, metadatas } = pageContext.resumeInfo ?? {};
   const metadata = useMetadata(metadatas);
 
   // Handle button stuff
   const [hideButtons, setHideButtons] = useState(false);
   useEffect(() => {
+    if (!withButtons) return;
     let lastCheckpoint = window.pageYOffset;
     let lastPos = window.pageYOffset;
     const handler = () => {
@@ -39,32 +41,38 @@ export default function Base({ pageContext, children }) {
     return () => {
       window.removeEventListener('scroll', handler, { passive: true });
     };
-  }, [hideButtons]);
+  }, [hideButtons, withButtons]);
 
   return (
     <ResumeContext.Provider value={pageContext.resumeInfo}>
-      <Helmet titleTemplate='Frederic Pun | %s' title={metadata.title}>
-        <meta name='keywords' content={metadata.keywords.join(`,`)} />
-        <meta name='description' content={metadata.description} />
-        <meta property='og:url' content={process.env.GATSBY_URL} />
-        <meta name='og:title' content={metadata.title} />
-        <meta name='og:description' content={metadata.description} />
-        <meta name='twitter:title' content={metadata.title} />
-        <meta name='twitter:description' content={metadata.description} />
-      </Helmet>
-      {children}
-      <nav className={classNames(controls, hideButtons && controls__hidden)}>
-        <Control icon={RiGithubLine} link='https://github.com/fpunny' />
-        <ChangePrimary initColor={theme.rgba} />
-        <ChangeTheme />
-        <Control action='print' icon={RiPrinterLine} onClick={() => window.print()} />
-      </nav>
-      <Toaster
-        position='bottom-center'
-        toastOptions={{
-          className: toast,
-        }}
-      />
+      <ThemeProvider initColor={theme?.rgba}>
+        <Helmet titleTemplate='Frederic Pun | %s' title={metadata.title}>
+          <meta name='keywords' content={metadata.keywords.join(`,`)} />
+          <meta name='description' content={metadata.description} />
+          <meta property='og:url' content={process.env.GATSBY_URL} />
+          <meta name='og:title' content={metadata.title} />
+          <meta name='og:description' content={metadata.description} />
+          <meta name='twitter:title' content={metadata.title} />
+          <meta name='twitter:description' content={metadata.description} />
+        </Helmet>
+        {children}
+        {withButtons && (
+          <nav className={classNames(controls, hideButtons && controls__hidden)}>
+            <Control icon={RiGithubLine} link='https://github.com/fpunny' />
+            <ChangePrimary />
+            <ChangeTheme />
+            <Control
+              onClick={window.print}
+              icon={RiPrinterLine}
+              action='print'
+            />
+          </nav>
+        )}
+        <Toaster
+          toastOptions={{ className: toast }}
+          position='bottom-center'
+        />
+      </ThemeProvider>
     </ResumeContext.Provider>
   );
 }

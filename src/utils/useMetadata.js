@@ -22,7 +22,7 @@ export default function useMetadata(metadatas = useResume().metadatas) {
   const { data } = useStaticQuery(query);
   return useMemo(
     () =>
-      data.nodes.concat(metadatas).reduce((acc, curr) => {
+      data.nodes.concat(metadatas ?? []).reduce((acc, curr) => {
         acc[curr.field] =
           curr.stringValue ??
           curr.numberValue ??
@@ -32,6 +32,6 @@ export default function useMetadata(metadatas = useResume().metadatas) {
           curr.listValue;
         return acc;
       }, {}),
-    [data],
+    [data, metadatas],
   );
 }

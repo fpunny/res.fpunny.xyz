@@ -1,5 +1,4 @@
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
-import { graphql, useStaticQuery } from 'gatsby';
 import { getMediaIcon, strip } from '../../../utils/media';
 import { useResume } from '../../../components/Base';
 import {
@@ -10,26 +9,17 @@ import {
   list_item,
   icon,
 } from './Header.module.scss';
-import { text__primary, text__alt } from '../shared.module.scss';
-
-const query = graphql`
-  {
-    site {
-      siteMetadata {
-        author
-      }
-    }
-  }
-`;
+import { text__primary } from '../shared.module.scss';
+import useMetadata from '../../../utils/useMetadata';
 
 export default function Header() {
-  const { site } = useStaticQuery(query);
   const { socials, title } = useResume();
+  const metadata = useMetadata();
 
   return (
     <header className={container}>
       <div className={header}>
-        <h1 className={text__primary}>{site.siteMetadata.author}</h1>
+        <h1 className={text__primary}>{metadata.author}</h1>
         <strong>{title}</strong>
       </div>
       <ul className={list}>

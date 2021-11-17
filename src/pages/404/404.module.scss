@@ -1,0 +1,60 @@
+@use '../../styles/variables';
+@use '../../styles/mixins';
+@use '../../styles/colors';
+
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  grid-template-columns: 1fr;
+  grid-gap: 0.5rem;
+  display: grid;
+}
+
+.heading {
+  font-size: 1.5rem;
+}
+
+.text {
+  color: colors.get-color(alt-text);
+  font-size: 1.1rem;
+}
+
+.link {
+  @include mixins.transition(color);
+  color: colors.get-color(text);
+
+  &:hover, &:focus {
+    color: colors.get-color(text, hover);
+  }
+
+  &:active {
+    color: colors.get-color(text, active);
+  }
+}
+
+.button {
+  @include mixins.transition(background-color border-color color);
+  border: 1px solid colors.get-color(alt-text);
+  border-radius: variables.$page-radius;
+  background-color: transparent;
+  color: colors.get-color(text);
+  text-decoration: none;
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+
+  &:hover, &:focus {
+    background-color: colors.get-color(alt-text);
+    color: colors.get-color(background);
+  }
+
+  &:active {
+    background-color: colors.get-color(alt-text, active);
+    border-color: colors.get-color(alt-text, active);
+  }
+}

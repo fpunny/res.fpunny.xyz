@@ -3,9 +3,6 @@ require('dotenv').config();
 const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  siteMetadata: {
-    author: 'Frederic Pun',
-  },
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-remark',
@@ -26,7 +23,7 @@ module.exports = {
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         token: process.env.GRAPHCMS_TOKEN,
         fragmentsPath: '.cache/graphcms',
-        stages: isProd ? ['PUBLISHED'] : ['PUBLISHED', 'DRAFT'],
+        stages: isProd ? ['PUBLISHED'] : ['DRAFT'],
       },
     },
     {

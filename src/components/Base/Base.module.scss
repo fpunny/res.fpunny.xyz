@@ -27,9 +27,12 @@
     @include mixins.transition(color);
   }
 
+  html, body, #___gatsby, #gatsby-focus-wrapper {
+    min-height: 100%;
+  }
+
   html {
     color: colors.get-color(text);
-    min-height: 100%;
     font-size: 16px;
   }
 
