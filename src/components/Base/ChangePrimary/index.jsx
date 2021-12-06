@@ -48,7 +48,7 @@ export default function ChangePrimary() {
       <Control
         onClick={() => setTempTheme({ ...theme })}
         icon={RiPaintBrushLine}
-        name="Change primary color"
+        title="Change primary color"
       />
       <Modal onClose={() => setTempTheme()} show={!!tempTheme}>
         <h2>Change Theme Color</h2>

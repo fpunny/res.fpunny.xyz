@@ -9,7 +9,7 @@ export default function ChangeTheme() {
     <Control
       icon={isDark ? RiMoonLine : RiSunLine}
       onClick={() => setIsDark(!isDark)}
-      name="Change theme"
+      theme="Change theme"
     />
   );
 }
