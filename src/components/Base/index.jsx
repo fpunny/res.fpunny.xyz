@@ -46,7 +46,11 @@ export default function Base({ pageContext, withButtons, children }) {
   return (
     <ResumeContext.Provider value={pageContext.resumeInfo}>
       <ThemeProvider initColor={theme?.rgba}>
-        <Helmet titleTemplate='Frederic Pun | %s' title={metadata.title}>
+        <Helmet
+          titleTemplate='Frederic Pun | %s'
+          htmlAttributes={{ lang: 'en' }}
+          title={metadata.title}
+        >
           <meta name='keywords' content={metadata.keywords.join(`,`)} />
           <meta name='description' content={metadata.description} />
           <meta property='og:url' content={process.env.GATSBY_URL} />
@@ -58,10 +62,11 @@ export default function Base({ pageContext, withButtons, children }) {
         {children}
         {withButtons && (
           <nav className={classNames(controls, hideButtons && controls__hidden)}>
-            <Control icon={RiGithubLine} link='https://github.com/fpunny' />
+            <Control icon={RiGithubLine} link='https://github.com/fpunny' aria-label="Go to github repo"/>
             <ChangePrimary />
             <ChangeTheme />
             <Control
+              name="Print resume"
               onClick={() => window.print}
               icon={RiPrinterLine}
               action='print'

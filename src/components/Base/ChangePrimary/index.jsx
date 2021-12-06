@@ -48,6 +48,7 @@ export default function ChangePrimary() {
       <Control
         onClick={() => setTempTheme({ ...theme })}
         icon={RiPaintBrushLine}
+        name="Change primary color"
       />
       <Modal onClose={() => setTempTheme()} show={!!tempTheme}>
         <h2>Change Theme Color</h2>
@@ -76,7 +77,7 @@ export default function ChangePrimary() {
               </div>
             ))}
           </div>
-          <button className={save}>Save changes</button>
+          <button name="Save changes" className={save}>Save changes</button>
         </form>
       </Modal>
     </>
