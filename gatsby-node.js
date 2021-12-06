@@ -1,4 +1,5 @@
 const config = require('./config');
+const QRCode = require('qrcode');
 const path = require('path');
 
 exports.onCreateBabelConfig = ({ actions }) => {
@@ -20,6 +21,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             ...PageInfo
           }
         }
+        allGraphCmsMetadata(filter: { global: { eq: true } }) {
+          nodes {
+            field
+            listValue
+            jsonValue
+            stringValue
+            numberValue
+            booleanValue
+            datetimeValue
+          }
+        }
       }
     `,
     { live: config.isProd ? [true] : [true, false] },
@@ -31,14 +43,38 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const templates = res.data.allGraphCmsTemplate.nodes;
-  templates.forEach(({ layout, subdomain, ...resumeInfo }) => {
-    const pageTemplate = path.resolve(`./src/layouts/${layout}/index.jsx`);
-    actions.createPage({
-      path: `/${subdomain ?? ''}`,
-      component: pageTemplate,
-      context: {
-        resumeInfo,
-      },
-    });
-  });
+  const { homepage } = res.data.allGraphCmsMetadata.nodes.reduce((acc, curr) => {
+    acc[curr.field] =
+      curr.stringValue ??
+      curr.numberValue ??
+      curr.booleanValue ??
+      curr.datetimeValue ??
+      curr.jsonValue ??
+      curr.listValue;
+    return acc;
+  }, {});
+
+  await Promise.all(
+    templates.map(async ({ layout, ...resumeInfo }) => {
+      const pageTemplate = path.resolve(`./src/layouts/${layout}/index.jsx`);
+      // Too small :c maybe one day we can use this
+      const qrcode = await QRCode.toString(homepage, {
+        type: 'svg',
+        margin: 0,
+        scale: 2,
+      });
+      actions.createPage({
+        path: `/${resumeInfo?.subdomain ?? ''}`,
+        component: pageTemplate,
+        context: {
+          resumeInfo: {
+            ...resumeInfo,
+            qrcode: qrcode
+              .replace('#ffffff', 'rgb(var(--page))')
+              .replace('#000000', 'rgb(var(--text))'),
+          },
+        },
+      });
+    }),
+  );
 };

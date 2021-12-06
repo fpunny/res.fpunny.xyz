@@ -1,3 +1,4 @@
+const { getLocalIdentName } = require('css-loader-shorter-classnames');
 require('dotenv').config();
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -8,9 +9,20 @@ module.exports = {
     'gatsby-transformer-remark',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-netlify`,
+    `gatsby-plugin-offline`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
-    'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: isProd ? {
+        cssLoaderOptions: {
+          modules: {
+            getLocalIdent: getLocalIdentName(),
+            auto: true,
+          },
+        },
+      } : {},
+    },
     {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
@@ -20,10 +32,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-graphcms',
       options: {
+        stages: isProd ? ['PUBLISHED'] : ['DRAFT'],
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         token: process.env.GRAPHCMS_TOKEN,
         fragmentsPath: '.cache/graphcms',
-        stages: isProd ? ['PUBLISHED'] : ['DRAFT'],
       },
     },
     {

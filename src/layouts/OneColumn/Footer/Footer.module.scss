@@ -1,0 +1,22 @@
+@use '../../../styles/colors';
+@use '../shared.module';
+@use '../variables';
+
+.container {
+  @extend .text__size-xs;
+  @extend .text__alt;
+  padding-bottom: variables.$page-padding * 0.6;
+  margin-top: auto;
+  text-align: end;
+  padding-top: 0;
+}
+
+.link {
+  @extend .text__link;
+  @extend .text;
+
+  &:hover,
+  &:focus {
+    color: colors.get-color(primary);
+  }
+}

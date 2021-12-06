@@ -1,6 +1,9 @@
 @use '../../styles/colors';
+@use '../../styles/mixins';
 
 .text {
+  color: colors.get-color(text);
+
   &__primary {
     color: colors.get-color(primary);
   }
@@ -24,6 +27,19 @@
 
     &-xs {
       font-size: 0.75rem;
+    }
+  }
+
+  &__link {
+    @include mixins.transition(color);
+
+    &:hover,
+    &:focus {
+      color: colors.get-color(text);
+    }
+
+    &:active {
+      color: colors.get-color(primary);
     }
   }
 }

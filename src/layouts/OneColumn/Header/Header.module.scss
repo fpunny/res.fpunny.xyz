@@ -29,20 +29,11 @@
 }
 
 .list_item {
-  @include mixins.transition(color);
+  @extend .text__link;
   @extend .text__alt;
   text-decoration: none;
   align-items: center;
   display: flex;
-
-  &:hover,
-  &:focus {
-    color: colors.get-color(text);
-  }
-
-  &:active {
-    color: colors.get-color(primary);
-  }
 }
 
 .icon {

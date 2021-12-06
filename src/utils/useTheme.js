@@ -7,6 +7,7 @@ const ThemeContext = createContext({
   isDark: false,
   setTheme: () => {},
   theme: { r: 0, g: 0, b: 0 },
+  ready: false,
 });
 
 export function sanitizeColor(color) {
@@ -25,6 +26,7 @@ export function rgbToHex(rgb) {
 export function ThemeProvider({ initColor, children }) {
   const [theme, setTheme] = useState(initColor ?? { r: 0, g: 0, b: 0 });
   const [isDark, setIsDark] = useState(false);
+  const [ready, setReady] = useState(false);
   const isDirty = useRef(false);
   const gtag = useAnalytics();
 
@@ -53,6 +55,7 @@ export function ThemeProvider({ initColor, children }) {
     window.setTimeout(() => {
       window.requestAnimationFrame(() => {
         document.documentElement.classList.add('animate');
+        setReady(true);
       });
     }, 50);
 
@@ -98,13 +101,14 @@ export function ThemeProvider({ initColor, children }) {
 
   return (
     <ThemeContext.Provider value={{
-      setIsDark: useCallback(() => {
+      setIsDark: useCallback(value => {
         isDirty.current = true;
-        setIsDark(!isDark);
+        setIsDark(_isDark => value ?? !_isDark);
       }, []),
       isDark,
       setTheme,
       theme,
+      ready,
     }}>
       <Helmet>
         <link

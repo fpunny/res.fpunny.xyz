@@ -5,21 +5,23 @@ import Page from '../../components/Page';
 import Base from '../../components/Base';
 import Education from './Education';
 import Project from './Project';
+import Footer from './Footer';
 import Header from './Header';
 import Skill from './Skill';
 import Work from './Work';
 
-import './OneColumn.module.scss';
+import { page } from './OneColumn.module.scss';
 
 export default function OneColumn(props) {
   return (
     <Base {...props} withButtons>
-      <Page>
+      <Page className={page}>
         <Header />
         <Skill />
         <Education />
         <Work />
         <Project />
+        <Footer/>
       </Page>
     </Base>
   );

@@ -62,7 +62,7 @@ export default function Base({ pageContext, withButtons, children }) {
             <ChangePrimary />
             <ChangeTheme />
             <Control
-              onClick={window.print}
+              onClick={() => window.print}
               icon={RiPrinterLine}
               action='print'
             />
