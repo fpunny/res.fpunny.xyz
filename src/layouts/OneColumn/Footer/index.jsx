@@ -7,7 +7,7 @@ import { container, link } from './Footer.module.scss';
 export default function Footer() {
   const { homepage } = useMetadata();
   const { subdomain } = useResume();
-  const url = `${homepage}${subdomain}`;
+  const url = `${homepage}${subdomain || '/' + subdomain}`;
 
   return (
     <BaseSection className={container}>
