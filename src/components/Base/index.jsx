@@ -67,7 +67,7 @@ export default function Base({ pageContext, withButtons, children }) {
             <ChangeTheme />
             <Control
               title="Print resume"
-              onClick={() => window.print}
+              onClick={() => window.print()}
               icon={RiPrinterLine}
               action='print'
             />
