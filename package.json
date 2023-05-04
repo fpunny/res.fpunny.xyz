@@ -40,8 +40,13 @@
   "devDependencies": {
     "@netlify/plugin-gatsby": "^3.6.2",
     "css-loader-shorter-classnames": "^2.0.1",
-    "eslint-config-react-app": "^7.0.1",
+    "eslint-config-react-app": "^6.0.0",
     "gatsby-source-graphql": "^5.9.0",
     "prettier": "^2.8.8"
+  },
+  "overrides": {
+    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
+      "react": "^18.2.0"
+    }
   }
 }
