@@ -22,7 +22,7 @@ export default function OneColumn(props) {
         <Education />
         <Work />
         <Project />
-        <Footer/>
+        <Footer />
       </Page>
     </Base>
   );

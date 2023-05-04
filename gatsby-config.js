@@ -13,14 +13,16 @@ module.exports = {
     `gatsby-plugin-image`,
     {
       resolve: 'gatsby-plugin-sass',
-      options: isProd ? {
-        cssLoaderOptions: {
-          modules: {
-            getLocalIdent: getLocalIdentName(),
-            auto: true,
-          },
-        },
-      } : {},
+      options: isProd
+        ? {
+            cssLoaderOptions: {
+              modules: {
+                getLocalIdent: getLocalIdentName(),
+                auto: true,
+              },
+            },
+          }
+        : {},
     },
     isProd && {
       resolve: 'gatsby-plugin-google-gtag',
@@ -29,10 +31,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
-        typeName: "GRAPHCMS",
-        fieldName: "graphCms",
+        typeName: 'GRAPHCMS',
+        fieldName: 'graphCms',
         url: process.env.GRAPHCMS_ENDPOINT,
         headers: {
           Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,

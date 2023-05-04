@@ -1,7 +1,6 @@
-
-import { useResume } from "../../../components/Base";
-import useMetadata from "../../../utils/useMetadata";
-import BaseSection from "../BaseSection";
+import { useResume } from '../../../components/Base';
+import useMetadata from '../../../utils/useMetadata';
+import BaseSection from '../BaseSection';
 import { container, link } from './Footer.module.scss';
 
 export default function Footer() {
@@ -13,13 +12,16 @@ export default function Footer() {
     <BaseSection className={container}>
       <p>Want to keep up to date with this resume?</p>
       <p>
-        Check it out @ <a
+        Check it out @{' '}
+        <a
           rel='noreferrer noopener'
           className={link}
           target='_blank'
           href={url}
-        >{url}</a>
+        >
+          {url}
+        </a>
       </p>
     </BaseSection>
-  )
+  );
 }

@@ -51,22 +51,25 @@ export default function Base({ pageContext, withButtons, children }) {
       <ThemeProvider initColor={Color(theme).object()}>
         {children}
         {withButtons && (
-          <nav className={classNames(controls, hideButtons && controls__hidden)}>
-            <Control icon={RiGithubLine} link='https://github.com/fpunny' aria-label="Go to github repo"/>
+          <nav
+            className={classNames(controls, hideButtons && controls__hidden)}
+          >
+            <Control
+              icon={RiGithubLine}
+              link='https://github.com/fpunny'
+              aria-label='Go to github repo'
+            />
             <ChangePrimary />
             <ChangeTheme />
             <Control
-              title="Print resume"
+              title='Print resume'
               onClick={() => window.print()}
               icon={RiPrinterLine}
               action='print'
             />
           </nav>
         )}
-        <Toaster
-          toastOptions={{ className: toast }}
-          position='bottom-center'
-        />
+        <Toaster toastOptions={{ className: toast }} position='bottom-center' />
       </ThemeProvider>
     </ResumeContext.Provider>
   );
@@ -83,7 +86,7 @@ export function Head(props) {
 
   return (
     <>
-      <html lang='en'/>
+      <html lang='en' />
       <title>{`Frederic Pun | ${metadata.title}`}</title>
       <meta name='keywords' content={metadata.keywords.join(`,`)} />
       <meta name='description' content={metadata.description} />

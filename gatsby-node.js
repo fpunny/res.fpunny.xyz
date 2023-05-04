@@ -12,16 +12,15 @@ exports.onCreateBabelConfig = ({ actions }) => {
 };
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const filter = config.isProd ? '(where: { live: true })' : '';
   const res = await graphql(
     `
       ${config.queryContext}
       query {
         graphCms {
-          templates${filter} {
+          templates${config.isProd ? '(where: { live: true })' : ''} {
             ...PageInfo
           }
-          metadatas${filter} {
+          metadatas${config.isProd ? '(where: { global: true })' : ''} {
             field
             listValue
             jsonValue

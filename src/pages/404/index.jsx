@@ -1,7 +1,14 @@
-import { Link } from "gatsby";
-import Base, { Head as BaseHead } from "../../components/Base";
-import useMetadata from "../../utils/useMetadata";
-import { container, content, heading, text, link, button } from './404.module.scss';
+import { Link } from 'gatsby';
+import Base, { Head as BaseHead } from '../../components/Base';
+import useMetadata from '../../utils/useMetadata';
+import {
+  container,
+  content,
+  heading,
+  text,
+  link,
+  button,
+} from './404.module.scss';
 
 export default function NotFound(props) {
   const metadata = useMetadata();
@@ -9,11 +16,10 @@ export default function NotFound(props) {
     <Base {...props}>
       <div className={container}>
         <div className={content}>
-          <h1 className={heading}>
-            Looks like this resume doesn't exist...
-          </h1>
+          <h1 className={heading}>Looks like this resume doesn't exist...</h1>
           <p className={text}>
-            Interested in my work? <a
+            Interested in my work?{' '}
+            <a
               className={link}
               href={`mailto:${metadata.contact}`}
               target='_blank'
@@ -38,7 +44,7 @@ export function Head(props) {
           height: 100%;
         }
       `}</style>
-      <BaseHead {...props}/>
+      <BaseHead {...props} />
     </>
   );
 }

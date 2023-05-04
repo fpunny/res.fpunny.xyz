@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 const query = graphql`
   {
     data: graphCms {
-      metadatas(where:{ global: true }) {
+      metadatas(where: { global: true }) {
         field
         listValue
         jsonValue

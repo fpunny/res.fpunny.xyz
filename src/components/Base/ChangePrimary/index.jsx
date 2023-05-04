@@ -44,43 +44,47 @@ export default function ChangePrimary() {
     return false;
   };
 
-  return enabled && (
-    <>
-      <Control
-        onClick={() => setTempTheme({ ...theme })}
-        icon={RiPaintBrushLine}
-        title="Change primary color"
-      />
-      <Modal onClose={() => setTempTheme()} show={!!tempTheme}>
-        <h2>Change Theme Color</h2>
-        <form onSubmit={submit} className={colorControls} noValidate>
-          <div
-            style={{ '--color': Color(tempTheme ?? theme).hex() }}
-            className={colorPreview}
-          />
-          <div className={colorInputs}>
-            {Object.entries(tempTheme ?? theme).map(([tag, value]) => (
-              <div className={inputGroup} key={tag}>
-                <input
-                  onChange={({ target }) =>
-                    setTempTheme({
-                      ...tempTheme,
-                      [tag]: target.value,
-                    })
-                  }
-                  className={colorInput}
-                  value={value}
-                  type='number'
-                  max='255'
-                  min='0'
-                />
-                <label>{tag.toUpperCase()}</label>
-              </div>
-            ))}
-          </div>
-          <button name="Save changes" className={save}>Save changes</button>
-        </form>
-      </Modal>
-    </>
+  return (
+    enabled && (
+      <>
+        <Control
+          onClick={() => setTempTheme({ ...theme })}
+          icon={RiPaintBrushLine}
+          title='Change primary color'
+        />
+        <Modal onClose={() => setTempTheme()} show={!!tempTheme}>
+          <h2>Change Theme Color</h2>
+          <form onSubmit={submit} className={colorControls} noValidate>
+            <div
+              style={{ '--color': Color(tempTheme ?? theme).hex() }}
+              className={colorPreview}
+            />
+            <div className={colorInputs}>
+              {Object.entries(tempTheme ?? theme).map(([tag, value]) => (
+                <div className={inputGroup} key={tag}>
+                  <input
+                    onChange={({ target }) =>
+                      setTempTheme({
+                        ...tempTheme,
+                        [tag]: target.value,
+                      })
+                    }
+                    className={colorInput}
+                    value={value}
+                    type='number'
+                    max='255'
+                    min='0'
+                  />
+                  <label>{tag.toUpperCase()}</label>
+                </div>
+              ))}
+            </div>
+            <button name='Save changes' className={save}>
+              Save changes
+            </button>
+          </form>
+        </Modal>
+      </>
+    )
   );
 }

@@ -1,7 +1,14 @@
-import { useState, useRef, useEffect, createContext, useContext, useCallback } from "react";
-import useAnalytics from "./useAnalytics";
-import { Helmet } from "react-helmet";
-import Color from "color";
+import {
+  useState,
+  useRef,
+  useEffect,
+  createContext,
+  useContext,
+  useCallback,
+} from 'react';
+import useAnalytics from './useAnalytics';
+import { Helmet } from 'react-helmet';
+import Color from 'color';
 
 const ThemeContext = createContext({
   setIsDark: () => {},
@@ -97,18 +104,20 @@ export function ThemeProvider({ initColor, children }) {
   const hex = Color(theme).hex();
 
   return (
-    <ThemeContext.Provider value={{
-      setIsDark: useCallback(value => {
-        isDirty.current = true;
-        setIsDark(_isDark => value ?? !_isDark);
-      }, []),
-      isDark,
-      setTheme,
-      theme,
-      ready,
-    }}>
+    <ThemeContext.Provider
+      value={{
+        setIsDark: useCallback((value) => {
+          isDirty.current = true;
+          setIsDark((_isDark) => value ?? !_isDark);
+        }, []),
+        isDark,
+        setTheme,
+        theme,
+        ready,
+      }}
+    >
       <Helmet>
-        <meta name='theme-color' content={hex}/>
+        <meta name='theme-color' content={hex} />
         <link
           href={`/api/assets/logo?${new URLSearchParams({ color: hex })}`}
           rel='shortcut icon'
