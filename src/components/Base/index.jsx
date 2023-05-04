@@ -44,8 +44,6 @@ export default function Base({ pageContext, withButtons, children }) {
     };
   }, [hideButtons, withButtons]);
 
-  console.log(pageContext);
-
   return (
     <ResumeContext.Provider value={pageContext.resumeInfo}>
       <ThemeProvider initColor={Color(theme).object()}>
