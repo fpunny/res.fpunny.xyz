@@ -12,7 +12,7 @@ exports.onCreateBabelConfig = ({ actions }) => {
 };
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const filter = config.isProd ? '(where: { live: $live })' : '';
+  const filter = config.isProd ? '(where: { live: true })' : '';
   const res = await graphql(
     `
       ${config.queryContext}
