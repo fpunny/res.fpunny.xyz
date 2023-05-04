@@ -3,7 +3,7 @@ require('dotenv').config();
 module.exports = {
   isProd: process.env.NODE_ENV === 'production',
   queryContext: `
-    fragment PageInfo on GraphCMS_Template {
+    fragment PageInfo on GRAPHCMS_Template {
       subdomain
       layout
       title

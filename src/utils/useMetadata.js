@@ -1,11 +1,10 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { useMemo } from 'react';
-import { useResume } from '../components/Base';
 
 const query = graphql`
   {
-    data: allGraphCmsMetadata(filter: { global: { eq: true } }) {
-      nodes {
+    data: graphCms {
+      metadatas(where:{ global: true }) {
         field
         listValue
         jsonValue
@@ -18,11 +17,11 @@ const query = graphql`
   }
 `;
 
-export default function useMetadata(metadatas = useResume().metadatas) {
+export default function useMetadata(metadatas) {
   const { data } = useStaticQuery(query);
   return useMemo(
     () =>
-      data.nodes.concat(metadatas ?? []).reduce((acc, curr) => {
+      data.metadatas.concat(metadatas ?? []).reduce((acc, curr) => {
         acc[curr.field] =
           curr.stringValue ??
           curr.numberValue ??

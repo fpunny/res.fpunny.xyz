@@ -5,7 +5,6 @@ const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   plugins: [
-    'gatsby-plugin-react-helmet',
     'gatsby-transformer-remark',
     `gatsby-transformer-sharp`,
     `gatsby-plugin-netlify`,
@@ -23,19 +22,21 @@ module.exports = {
         },
       } : {},
     },
-    {
+    isProd && {
       resolve: 'gatsby-plugin-google-gtag',
       options: {
         trackingIds: [process.env.GOOGLE_ANALYTICS],
       },
     },
     {
-      resolve: 'gatsby-source-graphcms',
+      resolve: "gatsby-source-graphql",
       options: {
-        stages: isProd ? ['PUBLISHED'] : ['DRAFT'],
-        endpoint: process.env.GRAPHCMS_ENDPOINT,
-        token: process.env.GRAPHCMS_TOKEN,
-        fragmentsPath: '.cache/graphcms',
+        typeName: "GRAPHCMS",
+        fieldName: "graphCms",
+        url: process.env.GRAPHCMS_ENDPOINT,
+        headers: {
+          Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
+        },
       },
     },
     {
@@ -46,5 +47,5 @@ module.exports = {
       },
       __key: 'pages',
     },
-  ],
+  ].filter(Boolean),
 };

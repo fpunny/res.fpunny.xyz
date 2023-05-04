@@ -12,17 +12,16 @@ exports.onCreateBabelConfig = ({ actions }) => {
 };
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
+  const filter = config.isProd ? '(where: { live: $live })' : '';
   const res = await graphql(
     `
       ${config.queryContext}
-      query templates($live: [Boolean]!) {
-        allGraphCmsTemplate(filter: { live: { in: $live } }) {
-          nodes {
+      query {
+        graphCms {
+          templates${filter} {
             ...PageInfo
           }
-        }
-        allGraphCmsMetadata(filter: { global: { eq: true } }) {
-          nodes {
+          metadatas${filter} {
             field
             listValue
             jsonValue
@@ -34,7 +33,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
     `,
-    { live: config.isProd ? [true] : [true, false] },
   );
 
   if (res.errors) {
@@ -42,8 +40,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
 
-  const templates = res.data.allGraphCmsTemplate.nodes;
-  const { homepage } = res.data.allGraphCmsMetadata.nodes.reduce((acc, curr) => {
+  const templates = res.data.graphCms.templates;
+  const { homepage } = res.data.graphCms.metadatas.reduce((acc, curr) => {
     acc[curr.field] =
       curr.stringValue ??
       curr.numberValue ??
@@ -67,6 +65,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         path: `/${resumeInfo?.subdomain ?? ''}`,
         component: pageTemplate,
         context: {
+          withButtons: true,
           resumeInfo: {
             ...resumeInfo,
             qrcode: qrcode

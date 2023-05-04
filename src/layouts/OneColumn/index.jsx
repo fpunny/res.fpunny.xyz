@@ -1,8 +1,9 @@
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/400.css';
 
-import Page from '../../components/Page';
+export { Head } from '../../components/Base';
 import Base from '../../components/Base';
+import Page from '../../components/Page';
 import Education from './Education';
 import Project from './Project';
 import Footer from './Footer';

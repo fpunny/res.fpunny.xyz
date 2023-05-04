@@ -1,22 +1,12 @@
 import { Link } from "gatsby";
-import { Helmet } from "react-helmet";
-import Base from "../../components/Base";
+import Base, { Head as BaseHead } from "../../components/Base";
 import useMetadata from "../../utils/useMetadata";
 import { container, content, heading, text, link, button } from './404.module.scss';
 
 export default function NotFound(props) {
   const metadata = useMetadata();
   return (
-    <Base
-      {...props}
-    >
-      <Helmet>
-        <style>{`
-          html, body, #___gatsby, #gatsby-focus-wrapper {
-            height: 100%;
-          }
-        `}</style>
-      </Helmet>
+    <Base {...props}>
       <div className={container}>
         <div className={content}>
           <h1 className={heading}>
@@ -37,5 +27,18 @@ export default function NotFound(props) {
         </div>
       </div>
     </Base>
+  );
+}
+
+export function Head(props) {
+  return (
+    <>
+      <style>{`
+        html, body, #___gatsby, #gatsby-focus-wrapper {
+          height: 100%;
+        }
+      `}</style>
+      <BaseHead {...props}/>
+    </>
   );
 }

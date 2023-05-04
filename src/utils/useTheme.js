@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, createContext, useContext, useCallback } from "react";
-import Helmet from 'react-helmet';
 import useAnalytics from "./useAnalytics";
+import { Helmet } from "react-helmet";
+import Color from "color";
 
 const ThemeContext = createContext({
   setIsDark: () => {},
@@ -15,12 +16,6 @@ export function sanitizeColor(color) {
   if (color > 255) color = 255;
   else if (color < 0) color = 0;
   return color;
-}
-
-export function rgbToHex(rgb) {
-  return `#${Object.values(rgb)
-    .map((color) => sanitizeColor(color).toString(16).padStart(2, '0'))
-    .join('')}`;
 }
 
 export function ThemeProvider({ initColor, children }) {
@@ -99,6 +94,8 @@ export function ThemeProvider({ initColor, children }) {
     }
   }, [isDark, initColor]);
 
+  const hex = Color(theme).hex();
+
   return (
     <ThemeContext.Provider value={{
       setIsDark: useCallback(value => {
@@ -111,10 +108,9 @@ export function ThemeProvider({ initColor, children }) {
       ready,
     }}>
       <Helmet>
+        <meta name='theme-color' content={hex}/>
         <link
-          href={`/api/assets/logo?${new URLSearchParams({
-            color: rgbToHex(theme),
-          })}`}
+          href={`/api/assets/logo?${new URLSearchParams({ color: hex })}`}
           rel='shortcut icon'
           type='image/svg'
         />

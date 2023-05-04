@@ -1,6 +1,7 @@
 import { RiPaintBrushLine } from '@react-icons/all-files/ri/RiPaintBrushLine';
 import { useEffect, useRef, useState } from 'react';
-import useTheme, { sanitizeColor, rgbToHex } from '../../../utils/useTheme';
+import Color from 'color';
+import useTheme, { sanitizeColor } from '../../../utils/useTheme';
 import useCheatcode from '../../../utils/useCheatcode';
 import useAnalytics from '../../../utils/useAnalytics';
 import Control from '../../Control';
@@ -54,7 +55,7 @@ export default function ChangePrimary() {
         <h2>Change Theme Color</h2>
         <form onSubmit={submit} className={colorControls} noValidate>
           <div
-            style={{ '--color': rgbToHex(tempTheme ?? theme) }}
+            style={{ '--color': Color(tempTheme ?? theme).hex() }}
             className={colorPreview}
           />
           <div className={colorInputs}>
