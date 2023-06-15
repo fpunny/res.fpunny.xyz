@@ -19,8 +19,8 @@ export default function OneColumn(props) {
       <Page className={page}>
         <Header />
         <Skill />
-        <Education />
         <Work />
+        <Education />
         <Project />
         <Footer />
       </Page>
